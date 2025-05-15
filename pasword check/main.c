@@ -66,15 +66,10 @@ int main() {
     printf("\n\n\n");
 
 
-        FILE *file = fopen("passwords.txt", "r");
-
-    if (!file) {
-        printf("Error opening file.\n");
-        return 1;
-    }
 
 
 
+printf("\n");
 
     char password[100];
 
@@ -99,6 +94,27 @@ int main() {
     printf(ANSI_COLOR_GREEN"\t\t########################################\n\n"ANSI_COLOR_RESET);
 
 
+        FILE *file;
+    char ch;
+
+    // Open the file in read mode
+    file = fopen("passwords.txt", "r");
+
+    // Check if the file exists
+    if (file == NULL) {
+        printf("Error: File not found!\n");
+        return 1;
+    }
+
+    // Read and display the contents of the file
+    while ((ch = fgetc(file)) != EOF) {
+        putchar(ch);
+    }
+
+    // Close the file
+    fclose(file);
+
+
     } else if (isStrongPassword(password)) {
     printf(ANSI_COLOR_GREEN"\t\t#############################\n");
     printf("\t\t## YOUR PASSWORD IS STRONG ##\n");
@@ -108,7 +124,30 @@ int main() {
     } else {
     printf(ANSI_COLOR_RED"\t\t#############################\n");
     printf("\t\t## YOUR PASSWORD IS WEAK   ##\n");
-    printf("\t\t#############################\n\n"ANSI_COLOR_RESET);
+    printf("\t\t#############################\n\n"ANSI_COLOR_CYAN);
+
+
+
+        FILE *file;
+    char ch;
+
+    // Open the file in read mode
+    file = fopen("passwords.txt", "r");
+    printf(ANSI_COLOR_RESET);
+
+    // Check if the file exists
+    if (file == NULL) {
+        printf("Error: File not found!\n");
+        return 1;
+    }
+
+    // Read and display the contents of the file
+    while ((ch = fgetc(file)) != EOF) {
+        putchar(ch);
+    }
+
+    // Close the file
+    fclose(file);
     }
 
     return 0;
